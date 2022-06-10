@@ -28,10 +28,8 @@ default_args = {
     max_active_runs=1,
 )
 def my_dag():
-    partner_settings = extract()
-
     process_tasks = SubDagOperator(
-        task_id="process_tasks", subdag=subdag_factory("my_dag", "process_tasks", default_args, partner_settings)
+        task_id="process_tasks", subdag=subdag_factory("my_dag", "process_tasks", default_args)
     )
 
     extract() >> process_tasks
